@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Usuarios</title>
+    <style>
+        body { font-family: Arial; padding: 20px; }
+        table { border-collapse: collapse; width: 100%; }
+        th, td { padding: 8px 12px; border: 1px solid #ccc; text-align: left; }
+        th { background-color: #f0f0f0; }
+        a.btn { padding: 6px 12px; text-decoration: none; color: white; border-radius: 4px; }
+        .nuevo { background-color: green; }
+        .editar { background-color: blue; }
+        .eliminar { background-color: red; }
+    </style>
+</head>
+<body>
+
+<h1>Usuarios registrados</h1>
+
+<a href="/usuarios/nuevo" class="btn nuevo">+ Nuevo usuario</a>
+<br><br>
+
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Mail</th>
+        <th>Teléfono</th>
+        <th>Acciones</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="usuario : ${usuarios}">
+        <td th:text="${usuario.id}"></td>
+        <td th:text="${usuario.nombre}"></td>
+        <td th:text="${usuario.mail}"></td>
+        <td th:text="${usuario.telefono}"></td>
+        <td>
+            <a th:href="@{'/usuarios/editar/' + ${usuario.id}}" class="btn editar">Editar</a>
+            <a th:href="@{'/usuarios/eliminar/' + ${usuario.id}}" class="btn eliminar" onclick="return confirm('¿Eliminar este usuario?');">Eliminar</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>
